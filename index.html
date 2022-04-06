@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <a href="https://google.com.br/">
+    Link para Google
+  </a>
+  <br /><br />
+  <button onClick="handleGithubClick()">
+    Fetch github api
+  </button>
+  Result: <span id="result"></span>
+
+  <script>
+    function handleGithubClick() {
+      fetch('https://api.github.com/path-errado')
+        .then(response => response.text())
+        .then(response => {
+          document.getElementById('result').innerText = response
+        })
+    }
+    
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then(
+        () => {
+          // registered! 👍🏼
+        },
+        err => {
+          console.error('SW registration failed! 😱', err)
+        }
+      )
+    })
+
+    window.onbeforeunload = function(event) {
+      console.log(event)
+    }
+  </script>
+</body>
+
+</html>
